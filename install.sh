@@ -200,11 +200,32 @@ fi
 
 echo 'installing virtualbox'
 sudo apt install virtualbox -y
+echo 'Do you want to configure virtualbox now?? (y|n)'
+read configure_vb
+if echo "$configure_vb" ;then
+	sudo apt-get update
+	sudo apt-get upgrade
+	sudo apt-get install mokutil
+	openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=VirtualBox/"
+	sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der $(modinfo -n vboxdrv)
+	sleep 5
+	clear
+	echo 'read more in --> https://unix.stackexchange.com/questions/327240/virtualbox-not-working-modules-not-working'
+	sleep 30
+else
+	echo "Okay!"
+fi
 
-echo 'installing geary'
-sudo apt install geary -y
+
 
 echo 'installing discord'
 cd ~/Downloads 
 wget -O workbench.deb https://cdn.mysql.com//Downloads/MySQLGUITools/mysql-workbench-community_8.0.20-1ubuntu20.04_amd64.deb
 sudo dpkg -i workbench.deb 
+
+echo 'installing SpringMail'
+cd ~/Downloads 
+wget -O SpringMail.deb https://updates.getmailspring.com/download?platform=linuxDeb
+sudo dpkg -i SpringMail.deb 
+
+
