@@ -229,3 +229,28 @@ wget -O SpringMail.deb https://updates.getmailspring.com/download?platform=linux
 sudo dpkg -i SpringMail.deb 
 
 
+echo 'installing Java8'
+sudo apt install openjdk-8-jdk
+clear
+java -version
+sudo update-alternatives --config java
+
+echo 'Do you want to configure environment now?? (y|n)'
+read configure_environment
+if echo "$configure_environment" ;then
+	echo 'set the text --> JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/bin/"'
+	sleep 5
+	sudo nano /etc/environment
+	source /etc/environment
+	clear 
+	echo $JAVA_HOME
+else
+	echo "Okay!"
+fi
+
+
+echo 'installing Maven'
+sudo apt update
+sudo apt install maven
+clear
+mvn -version
