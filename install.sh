@@ -197,7 +197,6 @@ else
 	echo "Okay!"
 fi
 
-
 echo 'installing virtualbox'
 sudo apt install virtualbox -y
 echo 'Do you want to configure virtualbox now?? (y|n)'
@@ -215,7 +214,6 @@ if echo "$configure_vb" ;then
 else
 	echo "Okay!"
 fi
-
 
 
 echo 'installing discord'
@@ -248,6 +246,8 @@ else
 	echo "Okay!"
 fi
 
+
+sudo apt-get install filezilla -y
 
 echo 'installing Maven'
 sudo apt update
